@@ -10,14 +10,36 @@ public class Ball : MonoBehaviour
     private float m_Right = 2.4f;
     private bool m_CanJump;
     private Rigidbody m_Rigidbody;
+    private Renderer m_Renderer;
+
+    [SerializeField] Vector3 m_StartPos;
 
     [SerializeField] private Vector3 m_JumpVelocity;
 
     void Start()
     {
+        GameManager.GameStart += GameStart;
+        GameManager.GameOver += GameOver;
+
         m_Rigidbody = GetComponent<Rigidbody>();
+        m_Renderer = GetComponent<Renderer>();
+
+        m_Renderer.enabled = false;
+        enabled = false;
     }
 
+    void GameStart()
+    {
+        transform.position = m_StartPos;
+        m_Renderer.enabled = true;
+        enabled = true;
+    }
+
+    void GameOver()
+    {
+        m_Renderer.enabled = false;
+        enabled = false;
+    }
     
     void Update()
     {
