@@ -158,7 +158,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 60}
-  m_SizeDelta: {x: 600, y: 100}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &83664300
 MonoBehaviour:
@@ -191,9 +191,9 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Press Space To Start
+  m_Text: Press Space To Return Menu
 --- !u!222 &83664301
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -473,6 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5506208dd514dc0896256ef43746c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Speed: 75
   m_StartPos: {x: 0, y: -1.76, z: 0}
   m_JumpVelocity: {x: 0, y: 4, z: 0}
 --- !u!1 &564815425
@@ -632,7 +633,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Infinite Runner
+  m_Text: Game Over!
 --- !u!222 &610339616
 CanvasRenderer:
   m_ObjectHideFlags: 0

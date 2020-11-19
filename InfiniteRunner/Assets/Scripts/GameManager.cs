@@ -1,51 +1,55 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+namespace praveen.one
 {
-    [HideInInspector] public static float NextPos;
-
-	public delegate void GameEvent();
-	public static event GameEvent GameStart, GameOver;
-
-	private bool m_IsStarted;
-
-    private void Start()
-    {
-		m_IsStarted = false;
-    }
-
-    public static void TriggerGameStart()
+	public enum GameScenes
 	{
-		if (GameStart != null)
-		{
-			GameStart();
-		}
+		menu = 0,
+		game = 1,
 	}
 
-	public static void TriggerGameOver()
+	public class GameManager : MonoBehaviour
 	{
-		if (GameOver != null)
+		[HideInInspector] public static float NextPos;
+
+		public delegate void GameEvent();
+		public static event GameEvent GameOver;
+
+		[HideInInspector] public static bool m_IsGameOver;
+
+		private void Start()
 		{
-			GameOver();
+			m_IsGameOver = false;
 		}
-	}
 
-	public static float GetNextPos()
-    {
-        NextPos += Random.Range(8, 20);
-        return NextPos;
-    }
-
-	private void Update()
-	{
-		if (m_IsStarted)
-			return;
-
-
-		if (Input.GetKeyDown(KeyCode.Space))
+		public static void TriggerGameOver()
 		{
-			m_IsStarted = true;
-			TriggerGameStart();
+			if (GameOver != null)
+			{
+				GameOver();
+				m_IsGameOver = true;
+				NextPos = 0;
+			}
+		}
+
+		public static float GetNextPos()
+		{
+			NextPos += Random.Range(8, 20);
+			return NextPos;
+		}
+
+		private void Update()
+		{
+			if (!m_IsGameOver)
+				return;
+
+
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				m_IsGameOver = false;
+				SceneManager.LoadScene((int)GameScenes.menu);
+			}
 		}
 	}
 }
