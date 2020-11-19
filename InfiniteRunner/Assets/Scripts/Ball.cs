@@ -8,15 +8,25 @@ public class Ball : MonoBehaviour
 
     private float m_left = -2.4f;
     private float m_Right = 2.4f;
+    private bool m_CanJump;
+    private Rigidbody m_Rigidbody;
+
+    [SerializeField] private Vector3 m_JumpVelocity;
 
     void Start()
     {
-        
+        m_Rigidbody = GetComponent<Rigidbody>();
     }
 
     
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space) && m_CanJump)
+        {
+            m_CanJump = false;
+            m_Rigidbody.AddForce(m_JumpVelocity, ForceMode.VelocityChange);
+        }
+
         var move = new Vector3(Input.GetAxis("Horizontal") * 0.2f, 0, 0.5f);
         transform.position += move * 75 * Time.deltaTime;
         DistanceTraveled = transform.localPosition.z;
@@ -31,5 +41,17 @@ public class Ball : MonoBehaviour
             transform.position = new Vector3(m_Right, transform.position.y, transform.position.z);
         }
 
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "obstacle")
+        {
+
+        }
+        else
+        {
+            m_CanJump = true;
+        }
     }
 }

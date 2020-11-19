@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ObstacleManager : MonoBehaviour
 {
-    [SerializeField] private Transform m_Prefab;
+    [SerializeField] private Transform[] m_Prefab;
     [SerializeField] private int m_NumberOfObjects;
     [SerializeField] private float m_RecycleOffset;
     [SerializeField] private Vector3 m_StartPosition;
@@ -18,7 +17,7 @@ public class ObstacleManager : MonoBehaviour
         m_NextPosition = m_StartPosition;
         for (int i = 0; i < m_NumberOfObjects; i++)
         {
-            Transform obstacle = Instantiate(m_Prefab);
+            Transform obstacle = Instantiate(m_Prefab[Random.Range(0,2)]);
             obstacle.transform.parent = transform;
             obstacle.GetComponent<Obstacle>().InIt(m_NextPosition);
             m_NextPosition.z = GameManager.GetNextPos();
